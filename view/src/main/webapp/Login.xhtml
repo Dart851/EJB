@@ -1,0 +1,65 @@
+<ui:composition template="/templates/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="content">
+		<f:view>
+			<div class="span3 offset1">
+				<h:form class="form">
+					<legend>Login page</legend>
+					<div class="container-fluid">
+						<div class="row-fluid">
+							<div class="control-group">
+
+								<div class="controls">
+									<label class="control-label">Login</label>
+
+									<div class="input-prepend span12">
+										<span class="add-on"><i class="icon-user"></i></span>
+										<h:inputText id="username" value="#{loginController.username}"
+											class="span12" required="true"
+											requiredMessage="Please Enter Username!" placeholder="Login"
+											message="fc"></h:inputText>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="${errorStyle}">
+
+								<div class="controls">
+									<label class="control-label" for="inputPassword">Password</label>
+
+									<div class="input-prepend span12">
+										<span class="add-on"><i class="icon-lock"></i></span>
+										<h:inputSecret id="password"
+											value="#{loginController.password}" class="span12"
+											required="true" requiredMessage="Please Enter password!"
+											placeholder="Password"></h:inputSecret>
+									</div>
+									<span class="help-block">${errorText}</span>
+								</div>
+
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="control-group">
+								<div class="controls">
+									<h:commandButton value="Submit" update="msgs"
+										actionListener="#{loginController.login}" type="submit"
+										icon="ui-icon-check" style="margin:0" />
+
+
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</h:form>
+			</div>
+		</f:view>
+	</ui:define>
+</ui:composition>

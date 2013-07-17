@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+	<title>Login page</title>
+	<link href="#{request.contextPath}/bootstrap/css/bootstrap.css"
+		rel="stylesheet" type="text/css" />
+	<link href="#{request.contextPath}/css/application.css"
+		rel="stylesheet" type="text/css" />
+
+	<script src="#{request.contextPath}/bootstrap/js/jquery-1.7.2.min.js"></script>
+
+	<script src="#{request.contextPath}/bootstrap/js/bootstrap.js"></script>
+		
+	<link
+            href="#{request.contextPath}/bootstrap/css/bootstrap.css"
+            rel="stylesheet" type="text/css"/>
+    <link href="#{request.contextPath}/css/application.css"
+          rel="stylesheet" type="text/css"/>
+    <link
+            href="#{request.contextPath}/datepicker/css/datepicker.css"
+            rel="stylesheet" type="text/css"/>
+			
+			<link
+            href="#{request.contextPath}/redactor/redactor.css"
+            rel="stylesheet" type="text/css"/>
+
+    <script
+            src="#{request.contextPath}/bootstrap/js/jquery-1.7.2.min.js"></script>
+
+    <script
+            src="#{request.contextPath}/datepicker/js/bootstrap-datepicker.js"></script>
+
+    <script
+            src="#{request.contextPath}/datepicker/js/prettify.js"></script>
+			
+			<script
+            src="#{request.contextPath}/redactor/redactor.js"></script>
+			
+			
+	<script>
+	 $(function () {
+     $('.redactor_content.span12').redactor({
+      
+		 focus: true,
+         toolbarFixed: true,
+         autoresize: false,
+         linebreaks: true,
+		 iframe: true,
+         css: '/view/redactor/redactor-iframe.css'
+     });
+ });
+	</script>
+    
+	<script>
+		$(document).ready(function() {
+			$('.carousel').carousel({
+				interval : 8000
+			});
+		});
+	</script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+	
+	
+	
+	
+	<style>
+</style>
+</h:head>
+<h:body>
+
+	<c:choose>
+		<c:when test="${error_login == null}">
+			<c:set var="errorText" scope="view" value="Input login and password" />
+			<c:set var="errorStyle" scope="view" value="control-group" />
+		</c:when>
+
+		<c:when test="${error_login == true}">
+			<c:set var="errorText" scope="view"
+				value="Incorrect login or password" />
+			<c:set var="errorStyle" scope="view" value="control-group error" />
+		</c:when>
+	</c:choose>
+
+
+
+
+	<div class="header-bar">
+
+		<div class="container-fluid">
+
+			<div class="header content clearfix">
+				<c:if test="#{request.getUserPrincipal() == null}">
+					<span class="help-inline">New to Demail?</span>
+					<a href="#{request.contextPath}/Registration.xhtml" id="createNewAccount" class="btn btn-custom-lighten">Sign
+						up</a>
+
+				</c:if>
+				<c:if test="#{request.getUserPrincipal() != null}">
+					<h:form>
+						<h:commandLink class="btn btn-custom-lighten" value="Logout"
+							actionListener="#{loginController.logout}" />
+					</h:form>
+				</c:if>
+
+
+
+			</div>
+		</div>
+	</div>
+	<div class="main-content">
+    <div class="container-fluid">
+        <div class="row-fluid">
+				
+				
+				
+				
+					<ui:insert name="left-menu">Put default content here, if any.</ui:insert>
+					<ui:insert name="content">Put default content here, if any.</ui:insert>
+
+
+				
+				
+			</div>
+		</div>
+	</div>
+
+
+</h:body>
+</html>

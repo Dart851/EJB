@@ -1,0 +1,107 @@
+<ui:composition template="/templates/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="content">
+		<div class="span10">
+
+			<div class="span10">
+
+
+				<h:form>
+					<legend> Create New Mail </legend>
+
+					<div class="container-fluid">
+						<div class="row-fluid">
+							<div class="control-group">
+
+
+								<div class="controls"></div>
+							</div>
+						</div>
+						<div class="row-fluid">
+
+							<h:selectOneMenu id="account"
+								value="#{newMailController.accountSender}"
+								converter="#{accountConverter}">
+								<f:selectItems value="#{newMailController.accounts}" var="l"
+									itemLabel="#{l.accountName}" itemValue="#{l}" />
+							</h:selectOneMenu>
+
+							<h:inputText class="span12"
+								value="#{newMailController.sendAccount}"
+								converter="#{accountConverterString}"></h:inputText>
+
+
+							<label class="control-label">Title</label>
+
+
+							<h:inputText class="span12" value="#{newMessage.title}" />
+
+
+							<label class="control-label">Body</label>
+
+							<h:inputTextarea id="redactor_content" style="height: 200px;" escape="false"
+								value="#{newMessage.body}" class="redactor_content span12" />
+
+
+
+						</div>
+
+						<div class="row-fluid">
+
+							<div class="control-group">
+								<div class="controls">
+									<h:commandButton value="Submit" update="send"
+										actionListener="#{newMailController.sendMessage}"
+										type="submit" icon="ui-icon-check" style="margin:0" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</h:form>
+			</div>
+
+		</div>
+	</ui:define>
+	<ui:define name="left-menu">
+		<div class="span2">
+
+			<a class="btn btn-mini"
+				href="#{request.contextPath}/user/NewMessage.xhtml">New Message</a>
+
+			<h:form>
+				<ul class="nav nav-pills nav-stacked">
+
+
+					<li><h:outputLink action="#{mailBoxController.getMessage}"
+							value="#{request.contextPath}/user/UserHome.xhtml">Input
+							
+							</h:outputLink></li>
+
+					<li><h:outputLink action="#{mailBoxController.getOutput}"
+							value="#{request.contextPath}/user/UserHome.xhtml">Output
+							<f:param name="box" value="output" />
+						</h:outputLink></li>
+
+					<li><h:outputLink action="#{mailBoxController.getSpam}"
+							value="#{request.contextPath}/user/UserHome.xhtml">Spam
+							<f:param name="box" value="spam" />
+
+						</h:outputLink></li>
+					<li><h:outputLink action="#{mailBoxController.getTrash}"
+							value="#{request.contextPath}/user/UserHome.xhtml">Trash
+							<f:param name="box" value="trash" />
+
+						</h:outputLink></li>
+					<hr></hr>
+					<li></li>
+				</ul>
+			</h:form>
+
+
+
+		</div>
+	</ui:define>
+</ui:composition>

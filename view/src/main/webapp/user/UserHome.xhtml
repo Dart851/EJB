@@ -1,0 +1,130 @@
+<ui:composition template="/templates/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+		<f:event type="preRenderView"
+			listener="#{mailBoxController.getMessage}" />
+		<div class="span10">
+			<h:form>
+				<ul class="pager pull-right">
+					<li><h:commandLink
+							actionListener="#{mailBoxController.getMessage}" value="Previous"
+							rendered="#{mailBoxController.numberPage > 0}">
+
+							<f:setPropertyActionListener
+								target="#{mailBoxController.numberPage}"
+								value="#{mailBoxController.numberPage-1}" />
+
+
+						</h:commandLink></li>
+					<li><h:commandLink
+							actionListener="#{mailBoxController.getMessage}" value="Next">
+							<!-- 	rendered="#{(mailBoxController.numberPage*10) <= mailBoxController.countAllInput}"> -->
+
+							<f:setPropertyActionListener
+								target="#{mailBoxController.numberPage}"
+								value="#{mailBoxController.numberPage+1}" />
+
+						</h:commandLink></li>
+				</ul>
+			</h:form>
+			<h:dataTable class="table table-condensed table-hover"
+				columnClasses="span1,span1,span2,span4,span1"
+				value="#{mailBoxController.statusList}" var="status">
+				<h:column class="span1">
+					<h:selectBooleanCheckbox>
+					</h:selectBooleanCheckbox>
+				</h:column>
+				<h:column class="span1">
+					<h:panelGroup rendered="#{mailBoxController.box != 'output' }">
+						<h:panelGroup rendered="#{status.isRead==true}">
+							<i class="icon-eye-open"></i>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{status.isRead==false}">
+							<i class="icon-envelope"></i>
+						</h:panelGroup>
+					</h:panelGroup>
+				</h:column>
+				<h:column class="span2">
+					<h:outputText value="#{status.acountsSender.accountName}"></h:outputText>
+				</h:column>
+				<h:column class="span4">
+					<h:form>
+
+
+						<h:commandLink action="#{mailBoxController.openMessage}"
+							value="#{status.message.title}" class="span12">
+							<f:param name="statusId" value="#{status.id}" />
+
+						</h:commandLink>
+
+
+					</h:form>
+
+				</h:column>
+				<h:column class="span1">
+					<h:outputText value="#{status.label.name}"></h:outputText>
+				</h:column>
+			</h:dataTable>
+
+
+		</div>
+	</ui:define>
+
+	<ui:define name="left-menu">
+		<div class="span2">
+
+			<a class="btn btn-mini"
+				href="#{request.contextPath}/user/NewMessage.xhtml">New Message</a>
+
+			<h:form>
+
+				<ul class="nav nav-pills nav-stacked">
+
+
+					<li><h:commandLink
+							actionListener="#{mailBoxController.getMessage}"
+							value="Input(#{mailBoxController.countInput})">
+							<f:setPropertyActionListener target="#{mailBoxController.box}"
+								value="input" />
+								<f:setPropertyActionListener target="#{mailBoxController.numberPage}"
+								value="0" />
+						</h:commandLink></li>
+
+					<li><h:commandLink
+							actionListener="#{mailBoxController.getMessage}" value="Output">
+							<f:setPropertyActionListener target="#{mailBoxController.box}"
+								value="output" />
+								<f:setPropertyActionListener target="#{mailBoxController.numberPage}"
+								value="0" />
+						</h:commandLink></li>
+
+					<li><h:commandLink
+							actionListener="#{mailBoxController.getMessage}" value="Spam">
+							<f:setPropertyActionListener target="#{mailBoxController.box}"
+								value="spam" />
+								<f:setPropertyActionListener target="#{mailBoxController.numberPage}"
+								value="0" />
+
+						</h:commandLink></li>
+					<li><h:commandLink
+							actionListener="#{mailBoxController.getMessage}" value="Trash">
+							<f:setPropertyActionListener target="#{mailBoxController.box}"
+								value="trash" />
+								<f:setPropertyActionListener target="#{mailBoxController.numberPage}"
+								value="0" />
+
+						</h:commandLink></li>
+					<hr></hr>
+					<li></li>
+				</ul>
+			</h:form>
+
+
+
+		</div>
+	</ui:define>
+</ui:composition>

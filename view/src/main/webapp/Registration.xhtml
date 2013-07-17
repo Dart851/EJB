@@ -1,0 +1,196 @@
+<ui:composition template="/templates/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="content">
+		<f:view>
+
+			<div class="span3 offset1">
+				<h:form>
+					<legend>Registration</legend>
+
+					<div class="container-fluid">
+						<div class="row-fluid">
+							<div class="control-group">
+
+
+								<div class="controls">
+									<label class="control-label">Login</label>
+
+
+									<h:inputText id="login" value="#{registrationForm.login}"
+										class="span12" required="true"
+										requiredMessage="Please Enter Username!" label="Login"
+										message="fc" validator="#{registrationController.validateLogin}">
+										
+
+
+									</h:inputText>
+									<h:message for="login" style="color:red" />
+
+
+								</div>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="control-group">
+								<div class="controls controls-row">
+
+									<label class="control-label">You name?</label>
+
+									<h:inputText id="fistName" value="#{registrationForm.fistName}"
+										class="span6" message="fc"></h:inputText>
+
+
+									<h:inputText id="lastname" value="#{registrationForm.lastName}"
+										class="span6" message="fc"></h:inputText>
+
+
+
+								</div>
+
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="control-group">
+								<div class="controls">
+									<div class="controls-row">
+										<label class="span6" for="dp3">Birth Day</label> <label
+											class="span6" for="gender">Gender</label>
+									</div>
+									<div class="controls-row">
+
+
+										<h:inputText id="dp3" value="#{registrationForm.birthDay}"
+											class="dp3 span6" message="fc">
+											<f:convertDateTime pattern="dd-MM-yyyy" />
+										</h:inputText>
+
+
+										<select class="span6" id="gender">
+											<option>Male</option>
+											<option>Female</option>
+
+										</select>
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+
+						<div class="row-fluid">
+							<div class="control-group">
+								<div class="controls">
+									<label class="control-label">Password</label>
+
+									<h:inputSecret value="#{registrationForm.password}"
+										class="span12" required="true" message="fc"></h:inputSecret>
+
+
+								</div>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="control-group">
+								<div class="controls">
+									<label class="control-label">Confirm Password</label>
+
+
+									<h:inputSecret value="#{registrationForm.confirmPassword}"
+										class="span12" required="true" message="fc"></h:inputSecret>
+
+								</div>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="control-group">
+
+
+								<div class="controls">
+									<label class="control-label">Email</label>
+									<h:inputText value="#{registrationForm.email}" class="span12"
+										message="fc"></h:inputText>
+								</div>
+							</div>
+						</div>
+						<div class="row-fluid">
+
+							<div class="control-group">
+								<div class="controls">
+
+									<h:commandButton value="Submit" update="msgs"
+										class="btn btn-success"
+										actionListener="#{registrationController.registration}"
+										type="submit" icon="ui-icon-check" style="margin:0" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</h:form>
+			</div>
+			<h:outputScript name="/js/calend.js" target="body" />
+		</f:view>
+	</ui:define>
+</ui:composition>
+
+
+
+
+<!-- 	<h:form class="form">
+				<legend>Login page</legend>
+				<div class="container-fluid">
+					<div class="row-fluid">
+						<div class="control-group">
+
+							<div class="controls">
+								<label class="control-label">Registration</label>
+
+								<div class="input-prepend span12">
+									<span class="add-on"><i class="icon-user"></i></span>
+									<h:inputText id="username" value="#{registrationForm.login}"
+										class="span12" required="true"
+										requiredMessage="Please Enter Username!" placeholder="Login"
+										message="fc"></h:inputText>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="${errorStyle}">
+
+							<div class="controls">
+								<label class="control-label" for="inputPassword">Password</label>
+
+								<div class="input-prepend span12">
+									<span class="add-on"><i class="icon-lock"></i></span>
+									<h:inputSecret id="password"
+										value="#{registrationForm.password}" class="span12"
+										required="true" requiredMessage="Please Enter password!"
+										placeholder="Password"></h:inputSecret>
+								</div>
+								<span class="help-block">${errorText}</span>
+							</div>
+
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="control-group">
+							<div class="controls">
+								<h:commandButton value="Submit" update="msgs"
+									actionListener="#{registrationController.registration}"
+									type="submit" icon="ui-icon-check" style="margin:0" />
+
+
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</h:form>
+		</f:view>
+	</ui:define>
+</ui:composition> -->

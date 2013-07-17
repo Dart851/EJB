@@ -1,0 +1,184 @@
+<ui:composition template="/templates/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+
+	<ui:define name="content">
+		<div class="span10">
+
+			<div class="span10">
+
+
+				<div>
+					<h4>
+						<h:outputText
+							value="#{openMailController.messageStatuss.message.title}"></h:outputText>
+					</h4>
+
+				</div>
+				<h:form>
+					<div class="span12"></div>
+
+
+					<div class="input-prepend">
+
+						<h:commandLink class="btn" type="submit" value="Reply"
+							action="#{openMailController.reply}">
+							<i class="icon-share-alt"></i>
+
+							<f:param name="replyId"
+								value="#{openMailController.messageStatuss.id}" />
+
+
+						</h:commandLink>
+						<h:commandLink class="btn" type="submit" value="Delete"
+							action="#{openMailController.delete}">
+							<i class="icon-trash"></i>
+						</h:commandLink>
+						<h:commandLink class="btn" type="submit" value="Forward">
+							<i class="icon-random"></i>
+						</h:commandLink>
+						<h:commandLink class="btn" type="submit" value="Spam"
+							action="#{openMailController.spam}">
+							<i class="icon-fire"></i>
+						</h:commandLink>
+
+
+						<h:commandLink class="btn" type="submit" value="Move to folder"
+							action="#{openMailController.toFolder}">
+							<i class="icon-folder-open"></i>
+						</h:commandLink>
+						<h:selectOneMenu id="label" value="#{openMailController.label}"
+							converter="#{labelConverter}">
+							<f:selectItem noSelectionOption="true" />
+							<f:selectItems
+								value="#{openMailController.messageStatuss.account.label}"
+								var="l" itemLabel="#{l.name}" itemValue="#{l}" />
+						</h:selectOneMenu>
+
+					</div>
+
+
+					<div class="span12"></div>
+
+
+					<div>
+						<small>From: <strong> <h:outputText
+									value="#{openMailController.messageStatuss.acountsSender.user.firstName}"
+									rendered="#{not empty openMailController.messageStatuss.acountsSender.user.firstName}" />
+								<h:outputText
+									value="#{openMailController.messageStatuss.acountsSender.user.lastName}"
+									rendered="#{not empty openMailController.messageStatuss.acountsSender.user.lastName}" />
+						</strong> &lt;<h:outputText
+								value="#{openMailController.messageStatuss.acountsSender.accountName}" />
+							&gt;;
+						</small>
+					</div>
+
+
+					<div>
+						<small>To: <strong> <h:outputText
+									value="#{openMailController.messageStatuss.account.user.firstName}"
+									rendered="#{not empty openMailController.messageStatuss.account.user.firstName}" />
+								<h:outputText
+									value="#{openMailController.messageStatuss.account.user.lastName}"
+									rendered="#{not empty openMailController.messageStatuss.account.user.lastName}" />
+						</strong> &lt;<h:outputText
+								value="#{openMailController.messageStatuss.account.accountName}" />
+							&gt;;
+						</small>
+					</div>
+					<hr></hr>
+					<h:outputText
+						value="#{openMailController.messageStatuss.message.body}"
+						rendered="#{not empty openMailController.messageStatuss.message.body}"
+						escape="false" />
+					<hr></hr>
+
+
+					<h:inputTextarea id="redactor_content" style="height: 200px;"
+						path="bodyFast" />
+
+
+
+
+					<div class="row-fluid">
+
+						<div class="control-group">
+							<div class="controls">
+								<h:commandLink class="btn btn-success" type="submit"
+									value="FastReply" />
+
+							</div>
+						</div>
+					</div>
+
+				</h:form>
+			</div>
+
+		</div>
+	</ui:define>
+
+
+	<ui:define name="left-menu">
+		<div class="span2">
+
+			<a class="btn btn-mini"
+				href="#{request.contextPath}/user/NewMessage.xhtml">New Message</a>
+
+			<h:form>
+
+				<ul class="nav nav-pills nav-stacked">
+
+
+					<li><h:commandLink
+							action="#{openMailController.box}"
+							value="Input(#{mailBoxController.countInput})">
+							<f:setPropertyActionListener target="#{mailBoxController.box}"
+								value="input" />
+								<f:setPropertyActionListener target="#{mailBoxController.numberPage}"
+								value="0" />
+						</h:commandLink></li>
+
+					<li><h:commandLink
+							action="#{openMailController.box}"
+							 value="Output">
+							<f:setPropertyActionListener target="#{mailBoxController.box}"
+								value="output" />
+								<f:setPropertyActionListener target="#{mailBoxController.numberPage}"
+								value="0" />
+						</h:commandLink></li>
+
+					<li><h:commandLink
+							action="#{openMailController.box}"
+							 value="Spam">
+							<f:setPropertyActionListener target="#{mailBoxController.box}"
+								value="spam" />
+								<f:setPropertyActionListener target="#{mailBoxController.numberPage}"
+								value="0" />
+
+						</h:commandLink></li>
+					<li><h:commandLink
+							action="#{openMailController.box}"
+							 value="Trash">
+							<f:setPropertyActionListener target="#{mailBoxController.box}"
+								value="trash" />
+								<f:setPropertyActionListener target="#{mailBoxController.numberPage}"
+								value="0" />
+
+						</h:commandLink></li>
+					<hr></hr>
+					<li></li>
+				</ul>
+			</h:form>
+
+
+
+		</div>
+	</ui:define>
+</ui:composition>
